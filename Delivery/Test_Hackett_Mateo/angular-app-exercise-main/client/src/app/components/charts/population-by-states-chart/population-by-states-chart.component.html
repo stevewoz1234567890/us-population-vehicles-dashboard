@@ -1,0 +1,17 @@
+<section class="flex flex-col gap-y-5 md:gap-y-10">
+    <p>
+        Population of
+        <span class="font-bold">
+            {{ getTitle() }}
+        </span>
+    </p>
+
+    <canvas *ngIf="!emptyData; else emptyTemplate" baseChart [type]="'line'" [data]="lineChartData"
+        [options]="lineChartOptions" [legend]="lineChartLegend">
+    </canvas>
+    <ng-template #emptyTemplate>
+        <p class="text-center">
+            No data available
+        </p>
+    </ng-template>
+</section>

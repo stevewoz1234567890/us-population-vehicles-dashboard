@@ -1,0 +1,17 @@
+<section class="flex flex-col gap-y-5 md:gap-y-10">
+    <p class="font-bold">
+        Cars per household in USA 2021
+    </p>
+
+    <div class="px-16 sm:px-28 lg:px-0">
+        <canvas  *ngIf="!emptyData; else emptyTemplate" baseChart [type]="'pie'" [datasets]="pieChartDatasets" [labels]="pieChartLabels"
+            [options]="pieChartOptions" [legend]="pieChartLegend">
+        </canvas>
+
+        <ng-template #emptyTemplate>
+            <p class="text-center">
+                No data available
+            </p>
+        </ng-template>
+    </div>
+</section>

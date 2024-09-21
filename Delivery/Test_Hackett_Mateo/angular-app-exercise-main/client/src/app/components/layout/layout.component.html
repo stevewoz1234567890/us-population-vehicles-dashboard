@@ -1,0 +1,13 @@
+<main class="bg-blue-sky w-screen h-dvh">
+    <section class="max-w-screen-2xl h-full px-3 md:px-8 py-3 md:py-4 mx-auto flex flex-col gap-y-4">
+        <app-header></app-header>
+
+        <section class="flex flex-col-reverse md:flex-row gap-2 md:gap-8 h-1 flex-1">
+            <app-sidebar></app-sidebar>
+
+            <section class="flex-1 bg-white rounded-xl shadow-lg p-3 pb-5 md:p-4 overflow-x-auto">
+                <router-outlet></router-outlet>
+            </section>
+        </section>
+    </section>
+</main>
