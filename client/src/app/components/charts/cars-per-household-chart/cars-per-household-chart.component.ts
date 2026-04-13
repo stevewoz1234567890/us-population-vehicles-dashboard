@@ -1,12 +1,16 @@
 import {
   AfterViewInit,
   Component,
+  DestroyRef,
   ElementRef,
+  Injector,
   OnDestroy,
+  afterNextRender,
   inject,
   signal,
   viewChild,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Chart } from 'chart.js';
 
 import type { VehiclesResponse } from '../../../models/charts.model';
@@ -30,6 +34,8 @@ const PIE_COLORS = [
 })
 export class CarsPerHouseholdChartComponent implements AfterViewInit, OnDestroy {
   private readonly dataUsa = inject(DataUsaService);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly injector = inject(Injector);
   private readonly canvas = viewChild<ElementRef<HTMLCanvasElement>>('chartCanvas');
 
   readonly loading = signal(true);
@@ -38,17 +44,20 @@ export class CarsPerHouseholdChartComponent implements AfterViewInit, OnDestroy 
   private chart: Chart | null = null;
 
   ngAfterViewInit(): void {
-    this.dataUsa.getVehiclesByHousehold().subscribe({
-      next: (data) => {
-        this.loading.set(false);
-        this.error.set(null);
-        this.renderChart(data);
-      },
-      error: () => {
-        this.loading.set(false);
-        this.error.set('Could not load vehicles data.');
-      },
-    });
+    this.dataUsa
+      .getVehiclesByHousehold()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (data) => {
+          this.loading.set(false);
+          this.error.set(null);
+          afterNextRender(() => this.renderChart(data), { injector: this.injector });
+        },
+        error: () => {
+          this.loading.set(false);
+          this.error.set('Could not load vehicles data.');
+        },
+      });
   }
 
   private renderChart(data: VehiclesResponse): void {
@@ -84,7 +93,7 @@ export class CarsPerHouseholdChartComponent implements AfterViewInit, OnDestroy 
             titleFont: { family: "'Open Sans', sans-serif" },
             callbacks: {
               label: (ctx) => {
-                const v = typeof ctx.parsed === 'number' ? ctx.parsed : Number(ctx.parsed);
+                const v = Number(ctx.raw);
                 const total = (ctx.dataset.data as number[]).reduce((a, b) => a + b, 0);
                 const pct = total ? ((v / total) * 100).toFixed(1) : '0';
                 return `${ctx.label}: ${v.toLocaleString()} (${pct}%)`;
