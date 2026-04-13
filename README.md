@@ -1,12 +1,12 @@
-# THG Exercise — Angular & FastAPI dashboard
+# us-population-vehicles-dashboard
 
-Single-page **Angular** dashboard with **Chart.js** visualizations, backed by **FastAPI** that integrates with the [Data USA](https://datausa.io/about/api) Tesseract API.
+Single-page **Angular** dashboard with **Chart.js** visualizations, backed by **FastAPI** that integrates with the [Data USA](https://datausa.io/about/api) Tesseract API. The UI focuses on **U.S. population trends** (selected states) and **household vehicle availability** (national, 2021).
 
 ## Features
 
 - **Line chart:** Population for Alabama, Florida, and California (2013–2021).
 - **Pie chart:** U.S. vehicle-availability buckets (2021), ACS-style data via Data USA.
-- Layout aligned with the provided template (Open Sans, palette, sidebar, assets).
+- Layout aligned with the design template (Open Sans, palette, sidebar, assets).
 - **Docker Compose** runs the API and static front end (nginx proxies `/api` to FastAPI).
 
 ## Run with Docker
@@ -53,4 +53,4 @@ Open http://localhost:4200
 - `GET /api/charts/vehicles-by-household` — JSON for the pie chart.
 - `GET /health` — health check.
 
-Upstream data uses `https://api.datausa.io/tesseract/...` (the legacy `datausa.io/api/data` URL from the exercise brief returns HTML in many environments; the backend uses the documented Tesseract API with equivalent cubes/measures).
+Upstream data uses `https://api.datausa.io/tesseract/...` (the legacy `datausa.io/api/data` URL from some exercise briefs returns HTML in many environments; this backend uses the documented Tesseract API with equivalent cubes/measures).
