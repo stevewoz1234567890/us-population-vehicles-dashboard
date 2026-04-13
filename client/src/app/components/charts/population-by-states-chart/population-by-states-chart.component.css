@@ -1,0 +1,39 @@
+.chart-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.chart-box {
+  position: relative;
+  height: 320px;
+}
+
+.state {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  z-index: 1;
+  font-size: 0.9rem;
+  color: var(--color-secondary);
+  background: rgb(255 255 255 / 0.7);
+}
+
+.state.error {
+  color: #c1121f;
+}
+
+.chart-box canvas {
+  display: block;
+}

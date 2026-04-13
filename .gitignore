@@ -1,1 +1,15 @@
 .DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Node / Angular
+node_modules/
+dist/
+.angular/
+
+# Env
+.env
+.env.*

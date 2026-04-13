@@ -1,0 +1,11 @@
+<section class="chart-block" aria-labelledby="pop-chart-title">
+  <h2 id="pop-chart-title" class="title">Population of Alabama, Florida and California</h2>
+  <div class="chart-box">
+    @if (loading()) {
+      <p class="state">Loading…</p>
+    } @else if (error()) {
+      <p class="state error">{{ error() }}</p>
+    }
+    <canvas #chartCanvas></canvas>
+  </div>
+</section>

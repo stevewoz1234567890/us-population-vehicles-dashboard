@@ -1,0 +1,28 @@
+:root {
+  --color-primary: #0f335b;
+  --color-secondary: #4d5358;
+  --color-bg: #ebf3fa;
+  --color-sidebar: #e3eff8;
+  --color-border: #d9e7f5;
+  --color-surface: #ffffff;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Open Sans', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  color: var(--color-secondary);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}

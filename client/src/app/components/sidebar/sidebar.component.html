@@ -1,0 +1,33 @@
+<aside class="sidebar">
+  <div class="brand">
+    <img src="assets/logo.svg" alt="The Hackett Group" class="logo" width="172" height="21" />
+  </div>
+
+  <nav class="nav" aria-label="Main">
+    @for (item of nav; track item.label) {
+      <a
+        href="#"
+        class="nav-item"
+        [ngClass]="{ active: item.active }"
+        (click)="$event.preventDefault()"
+      >
+        <img [src]="item.icon" alt="" width="20" height="20" />
+        <span>{{ item.label }}</span>
+      </a>
+    }
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="user">
+      <img src="assets/john.png" alt="" class="avatar" width="48" height="48" />
+      <div class="user-text">
+        <div class="name">John Smith</div>
+        <div class="role">Principal</div>
+      </div>
+    </div>
+    <button type="button" class="sign-out">
+      <img src="assets/sign-out.svg" alt="" width="18" height="18" />
+      Sign Out
+    </button>
+  </div>
+</aside>
